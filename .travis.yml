@@ -6,8 +6,11 @@ env:
 node_js:
   - 'node'
 before_install:
+  - apt-cache show libssl-dev
   - source ./dev/install-openssl.sh 1.0.2
   - openssl version
+  - apt-cache show libssl-dev
+  - export LD_LIBRARY_PATH="${HOME}/openssl/openssl-${OPENSSL}/lib"
   - curl https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz -O -#
   - tar -xzvf mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz
   - mkdir -p mongo/db
