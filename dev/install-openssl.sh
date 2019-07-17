@@ -24,8 +24,8 @@ fi
   --prefix=${OPENSSL_DIR} \
   enable-crypto-mdebug enable-crypto-mdebug-backtrace \
   linux-x86_64
-make -s $JOBS
-make install_sw
+$(MAKE) -s $JOBS
+$(MAKE) install_sw
 popd
 
 export PATH="${OPENSSL_DIR}/bin:${PATH}"
