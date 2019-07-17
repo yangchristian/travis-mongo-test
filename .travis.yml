@@ -9,8 +9,8 @@ before_install:
   # - source ./dev/install-openssl.sh 1.0.2
   - openssl version
   - sudo apt-get update
-  - sudo apt-get install --only-upgrade libssl1.0.2
-  - apt-cache show libssl-dev
+  - sudo apt-get install --only-upgrade --reinstall libssl1.0.0
+  - apt-cache show libssl
   - curl https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz -O -#
   - tar -xzvf mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz
   - mkdir -p mongo/db
