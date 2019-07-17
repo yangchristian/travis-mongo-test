@@ -1,0 +1,27 @@
+language: node_js
+dist: trusty
+sudo: required
+env:
+  - MONGODB=3.6.13
+node_js:
+  - 'node'
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install --only-upgrade openssl
+  - sudo apt-get install --only-upgrade libssl-dev
+  - openssl version
+  - curl https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz -O -#
+  - tar -xzvf mongodb-linux-x86_64-ubuntu1604-${MONGODB}.tgz
+  - mkdir -p mongo/db
+  - mkdir -p mongo/log
+  - sudo ./mongodb-linux-x86_64-ubuntu1604-${MONGODB}/bin/mongod --dbpath=./mongo/db --fork --logpath=./mongo/log/test.log
+  - sleep 5
+  - mongo --eval 'rs.initiate()'
+before_script:
+  # Yes, artificial wait is the travis-recommended way to ensure connections. See:
+  # https://docs.travis-ci.com/user/database-setup/#mongodb-does-not-immediately-accept-connections
+  - "until nc -z localhost 27017; do echo Waiting for MongoDB; sleep 1; done"
+script:
+  - npm test
+after_success:
+  - npm prune

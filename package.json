@@ -1,0 +1,13 @@
+{
+  "name": "travis-mongo-test",
+  "version": "0.0.0-development",
+  "private": true,
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
