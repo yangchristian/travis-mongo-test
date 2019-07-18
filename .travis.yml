@@ -1,6 +1,8 @@
 language: node_js
 dist: xenial
 sudo: required
+services:
+  - elasticsearch
 env:
   - MONGODB=3.6.13 OPENSSL=1.0.2
 node_js:
